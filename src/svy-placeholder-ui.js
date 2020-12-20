@@ -36,14 +36,14 @@ export default class SvyPlaceholderUi extends Plugin {
             } );
 
             // Disable the placeholder button when the command is disabled.
-            const command = editor.commands.get( 'placeholder' );
-            dropdownView.bind( 'isEnabled' ).to( command );
+            // const command = editor.commands.get( 'placeholder' );
+            // dropdownView.bind( 'isEnabled' ).to( command );
 
-            // Execute the command when the dropdown item is clicked (executed).
-            this.listenTo( dropdownView, 'execute', evt => {
-                editor.execute( 'placeholder', { value: evt.source.commandParam } );
-                editor.editing.view.focus();
-            } );
+            // // Execute the command when the dropdown item is clicked (executed).
+            // this.listenTo( dropdownView, 'execute', evt => {
+            //     editor.execute( 'placeholder', { value: evt.source.commandParam } );
+            //     editor.editing.view.focus();
+            // } );
 
             return dropdownView;
 		});
