@@ -22,7 +22,7 @@ export default class SvyPlaceholderUi extends Plugin {
         this._defineSchema();
         this._defineConverters();
 
-        this.editor.commands.add( 'svy-placeholder', new SvyPlaceholderCommand( this.editor ) );
+        this.editor.commands.add( 'servoyPlaceholder', new SvyPlaceholderCommand( this.editor ) );
 
         this.editor.editing.mapper.on(
             'viewToModelPosition',
@@ -33,7 +33,7 @@ export default class SvyPlaceholderUi extends Plugin {
     _defineSchema() {
         const schema = this.editor.model.schema;
 
-        schema.register( 'placeholder', {
+        schema.register( 'servoyPlaceholder', {
             // Allow wherever text is allowed:
             allowWhere: '$text',
 
@@ -65,7 +65,7 @@ export default class SvyPlaceholderUi extends Plugin {
         } );
 
         conversion.for( 'editingDowncast' ).elementToElement( {
-            model: 'svy-placeholder',
+            model: 'servoyPlaceholder',
             view: ( modelItem, { writer: viewWriter } ) => {
                 const widgetElement = createPlaceholderView( modelItem, viewWriter );
 
@@ -75,7 +75,7 @@ export default class SvyPlaceholderUi extends Plugin {
         } );
 
         conversion.for( 'dataDowncast' ).elementToElement( {
-            model: 'svy-placeholder',
+            model: 'servoyPlaceholder',
             view: ( modelItem, { writer: viewWriter } ) => createPlaceholderView( modelItem, viewWriter )
         } );
 

@@ -5,7 +5,7 @@ export default class SvyPlaceholderCommand extends Command {
         const editor = this.editor;
 
         editor.model.change( writer => {
-            // Create a <placeholder> elment with the "name" attribute...
+            // Create a <svy-placeholder> elment with the "name" and "dataprovider" attribute...
             const placeholder = writer.createElement( 'svy-placeholder', { name: value, dataprovider: dataProvider } );
 
             // ... and insert it into the document.
