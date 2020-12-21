@@ -20,47 +20,48 @@ export default class SvyPlaceholderUi extends Plugin {
         const editor = this.editor;
         const t = editor.t;
 
-        this.placeholderConfig = this.editor.config.get('svyPlaceholderConfig') || {name: 'Placeholder', values: []};
+        this.placeholderConfig = this.editor.config.get('svyPlaceholderConfig');
         console.log(this.placeholderConfig);
 
         this.dropdownView = null;
 
-        // The "placeholder" dropdown must be registered among the UI components of the editor
-        // to be displayed in the toolbar.
-        editor.ui.componentFactory.add( 'servoyPlaceholder', locale => {
-            const dropdownView = createDropdown( locale );
+        if (this.placeholderConfig && this.placeholderConfig.values && this.placeholderConfig.values.length > 0) {
+            // The "placeholder" dropdown must be registered among the UI components of the editor
+            // to be displayed in the toolbar.
+            editor.ui.componentFactory.add( 'servoyPlaceholder', locale => {
+                const dropdownView = createDropdown( locale );
 
-            // Populate the list in the dropdown with items.
-            addListToDropdown( dropdownView, this.getDropdownItemsDefinitions( this.placeholderConfig ) );
+                // Populate the list in the dropdown with items.
+                addListToDropdown( dropdownView, this.getDropdownItemsDefinitions( this.placeholderConfig ) );
 
-            dropdownView.buttonView.set( {
-                // The t() function helps localize the editor. All strings enclosed in t() can be
-                // translated and change when the language of the editor changes.
-                label: t( 'Placeholder' ),
-                tooltip: true,
-                withText: true
-            } );
+                dropdownView.buttonView.set( {
+                    // The t() function helps localize the editor. All strings enclosed in t() can be
+                    // translated and change when the language of the editor changes.
+                    label: t( 'Placeholder' ),
+                    tooltip: true,
+                    withText: true
+                } );
 
-            // Disable the placeholder button when the command is disabled.
-            const command = editor.commands.get( 'servoyPlaceholder' );
-            dropdownView.bind( 'isEnabled' ).to( command );
+                // Disable the placeholder button when the command is disabled.
+                const command = editor.commands.get( 'servoyPlaceholder' );
+                dropdownView.bind( 'isEnabled' ).to( command );
 
-            // // Execute the command when the dropdown item is clicked (executed).
-            this.listenTo( dropdownView, 'execute', evt => {
-                editor.execute( 'servoyPlaceholder', { value: evt.source.commandParam } );
-                editor.editing.view.focus();
-            } );
+                // // Execute the command when the dropdown item is clicked (executed).
+                this.listenTo( dropdownView, 'execute', evt => {
+                    editor.execute( 'servoyPlaceholder', { value: evt.source.commandParam } );
+                    editor.editing.view.focus();
+                } );
 
-            this.dropdownView = dropdownView;
+                this.dropdownView = dropdownView;
 
-            return dropdownView;
-        });
-        
-        //sync disabled state of editor and toolbar items
-		this.editor.on('change:isReadOnly', () => {
-			this.dropdownView.isEnabled = !this.editor.isReadOnly;
-        });
+                return dropdownView;
+            });
 
+            //sync disabled state of editor and toolbar items
+            this.editor.on('change:isReadOnly', () => {
+                this.dropdownView.isEnabled = !this.editor.isReadOnly;
+            });
+        }
 	}
 	
 	getDropdownItemsDefinitions( placeholderConfig ) {
