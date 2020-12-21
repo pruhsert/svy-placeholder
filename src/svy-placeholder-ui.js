@@ -35,8 +35,6 @@ export default class SvyPlaceholderUi extends Plugin {
                 addListToDropdown( dropdownView, this.getDropdownItemsDefinitions( this.placeholderConfig ) );
 
                 dropdownView.buttonView.set( {
-                    // The t() function helps localize the editor. All strings enclosed in t() can be
-                    // translated and change when the language of the editor changes.
                     label: this.placeholderConfig.name,
                     tooltip: true,
                     withText: true
@@ -46,7 +44,7 @@ export default class SvyPlaceholderUi extends Plugin {
                 const command = editor.commands.get( 'servoyPlaceholder' );
                 dropdownView.bind( 'isEnabled' ).to( command );
 
-                // // Execute the command when the dropdown item is clicked (executed).
+                // Execute the command when the dropdown item is clicked (executed).
                 this.listenTo( dropdownView, 'execute', evt => {
                     editor.execute( 'servoyPlaceholder', { value: evt.source.commandParam, dataProvider: evt.source.dataProvider } );
                     editor.editing.view.focus();

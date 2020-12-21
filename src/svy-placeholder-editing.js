@@ -65,7 +65,7 @@ export default class SvyPlaceholderUi extends Plugin {
         } );
 
         conversion.for( 'editingDowncast' ).elementToElement( {
-            model: 'servoyPlaceholder',
+            model: 'svy-placeholder',
             view: ( modelItem, { writer: viewWriter } ) => {
                 const widgetElement = createPlaceholderView( modelItem, viewWriter );
 
@@ -75,7 +75,7 @@ export default class SvyPlaceholderUi extends Plugin {
         } );
 
         conversion.for( 'dataDowncast' ).elementToElement( {
-            model: 'servoyPlaceholder',
+            model: 'svy-placeholder',
             view: ( modelItem, { writer: viewWriter } ) => createPlaceholderView( modelItem, viewWriter )
         } );
 
