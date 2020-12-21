@@ -20,7 +20,7 @@ export default class SvyPlaceholderUi extends Plugin {
         const editor = this.editor;
         const t = editor.t;
 
-        const placeholderConfig = this.editor.config.get('svyPlaceholderConfig') || [];
+        const placeholderConfig = this.editor.config.get('svyPlaceholderConfig') || {name: 'Placeholder', values: []};
         console.log(placeholderConfig);
 
         this.dropdownView = null;
@@ -66,7 +66,7 @@ export default class SvyPlaceholderUi extends Plugin {
 	getDropdownItemsDefinitions( placeholderConfig ) {
         const itemDefinitions = new Collection();
 
-        placeholderConfig.forEach(element => {
+        placeholderConfig.values.forEach(element => {
             const definition = {
                 type: 'button',
                 model: new Model( {
