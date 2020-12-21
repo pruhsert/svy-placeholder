@@ -66,20 +66,22 @@ export default class SvyPlaceholderUi extends Plugin {
 	getDropdownItemsDefinitions( placeholderConfig ) {
         const itemDefinitions = new Collection();
 
-        placeholderConfig.values.forEach(element => {
-            const definition = {
-                type: 'button',
-                model: new Model( {
-                    commandParam: element.displayValue,
-                    label: element.displayValue,
-                    dataProvider: element.dataProvider,
-                    withText: true
-                } )
-            };
+        if (placeholderConfig && placeholderConfig.values) {
+            placeholderConfig.values.forEach(element => {
+                const definition = {
+                    type: 'button',
+                    model: new Model( {
+                        commandParam: element.displayValue,
+                        label: element.displayValue,
+                        dataProvider: element.dataProvider,
+                        withText: true
+                    } )
+                };
 
-            // Add the item definition to the collection.
-            itemDefinitions.add( definition );
-        });
+                // Add the item definition to the collection.
+                itemDefinitions.add( definition );
+            });
+        }
 
         return itemDefinitions;
 	}
