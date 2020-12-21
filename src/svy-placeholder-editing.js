@@ -8,7 +8,7 @@ import { toWidget, viewToModelPositionOutsideModelElement } from '@ckeditor/cked
 import Widget from '@ckeditor/ckeditor5-widget/src/widget';
 
 import SvyPlaceholderCommand from './svy-placeholder-command';
-import './theme/placeholder.css';
+//import './theme/placeholder.css';
 
 export default class SvyPlaceholderUi extends Plugin {
 
