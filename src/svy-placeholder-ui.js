@@ -20,8 +20,8 @@ export default class SvyPlaceholderUi extends Plugin {
         const editor = this.editor;
         const t = editor.t;
 
-        const placeholderConfig = this.editor.config.get('svyPlaceholderConfig') || {name: 'Placeholder', values: []};
-        console.log(placeholderConfig);
+        this.placeholderConfig = this.editor.config.get('svyPlaceholderConfig') || {name: 'Placeholder', values: []};
+        console.log(this.placeholderConfig);
 
         this.dropdownView = null;
 
@@ -31,7 +31,7 @@ export default class SvyPlaceholderUi extends Plugin {
             const dropdownView = createDropdown( locale );
 
             // Populate the list in the dropdown with items.
-            addListToDropdown( dropdownView, this.getDropdownItemsDefinitions( placeholderConfig ) );
+            addListToDropdown( dropdownView, this.getDropdownItemsDefinitions( this.placeholderConfig ) );
 
             dropdownView.buttonView.set( {
                 // The t() function helps localize the editor. All strings enclosed in t() can be
