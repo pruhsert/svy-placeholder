@@ -4,6 +4,7 @@
 
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import SvyPlaceholderUi from './svy-placeholder-ui';
+import SvyPlaceholderEditing from './svy-placeholder-editing';
 
 /**
  * Servoy Placeholder plugin
@@ -16,7 +17,7 @@ export default class SvyPlaceholder extends Plugin {
      * @inheritDoc
      */
 	static get requires() {
-		return [SvyPlaceholderUi];
+		return [SvyPlaceholderUi, SvyPlaceholderEditing];
 	}
 
     /**
