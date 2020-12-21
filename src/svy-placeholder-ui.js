@@ -21,17 +21,17 @@ export default class SvyPlaceholderUi extends Plugin {
         const t = editor.t;
 
         const placeholderConfig = this.editor.config.get('svyPlaceholderConfig') || [];
-        const placeholderNames = [ 'date', 'first name', 'surname' ];
+        console.log(placeholderConfig);
 
         this.dropdownView = null;
 
         // The "placeholder" dropdown must be registered among the UI components of the editor
         // to be displayed in the toolbar.
-        editor.ui.componentFactory.add( 'svy-placeholder', locale => {
+        editor.ui.componentFactory.add( 'servoyPlaceholder', locale => {
             const dropdownView = createDropdown( locale );
 
             // Populate the list in the dropdown with items.
-            addListToDropdown( dropdownView, this.getDropdownItemsDefinitions( placeholderNames ) );
+            addListToDropdown( dropdownView, this.getDropdownItemsDefinitions( placeholderConfig ) );
 
             dropdownView.buttonView.set( {
                 // The t() function helps localize the editor. All strings enclosed in t() can be
@@ -42,12 +42,12 @@ export default class SvyPlaceholderUi extends Plugin {
             } );
 
             // Disable the placeholder button when the command is disabled.
-            const command = editor.commands.get( 'svy-placeholder' );
+            const command = editor.commands.get( 'servoyPlaceholder' );
             dropdownView.bind( 'isEnabled' ).to( command );
 
             // // Execute the command when the dropdown item is clicked (executed).
             this.listenTo( dropdownView, 'execute', evt => {
-                editor.execute( 'svy-placeholder', { value: evt.source.commandParam } );
+                editor.execute( 'servoyPlaceholder', { value: evt.source.commandParam } );
                 editor.editing.view.focus();
             } );
 
@@ -63,22 +63,23 @@ export default class SvyPlaceholderUi extends Plugin {
 
 	}
 	
-	getDropdownItemsDefinitions( placeholderNames ) {
+	getDropdownItemsDefinitions( placeholderConfig ) {
         const itemDefinitions = new Collection();
 
-        for ( const name of placeholderNames ) {
+        placeholderConfig.forEach(element => {
             const definition = {
                 type: 'button',
                 model: new Model( {
-                    commandParam: name,
-                    label: name,
+                    commandParam: element.displayValue,
+                    label: element.displayValue,
+                    dataProvider: element.dataProvider,
                     withText: true
                 } )
             };
 
             // Add the item definition to the collection.
             itemDefinitions.add( definition );
-        }
+        });
 
         return itemDefinitions;
 	}
