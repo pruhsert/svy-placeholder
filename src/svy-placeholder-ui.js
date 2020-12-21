@@ -36,8 +36,10 @@ export default class SvyPlaceholderUi extends Plugin {
 
                 dropdownView.buttonView.set( {
                     label: this.placeholderConfig.name,
-                    tooltip: true,
-                    withText: true
+                    tooltip: this.placeholderConfig.true,
+                    withText: this.placeholderConfig.true,
+                    icon: this.placeholderConfig.icon,
+                    isEnabled: this.placeholderConfig.isEnabled
                 } );
 
                 // Disable the placeholder button when the command is disabled.
