@@ -1,12 +1,12 @@
 import Command from '@ckeditor/ckeditor5-core/src/command';
 
 export default class SvyPlaceholderCommand extends Command {
-    execute( { value } ) {
+    execute( { value, dataProvider } ) {
         const editor = this.editor;
 
         editor.model.change( writer => {
             // Create a <placeholder> elment with the "name" attribute...
-            const placeholder = writer.createElement( 'placeholder', { name: value } );
+            const placeholder = writer.createElement( 'svy-placeholder', { name: value, dataprovider: dataProvider } );
 
             // ... and insert it into the document.
             editor.model.insertContent( placeholder );
@@ -20,7 +20,7 @@ export default class SvyPlaceholderCommand extends Command {
         const model = this.editor.model;
         const selection = model.document.selection;
 
-        const isAllowed = model.schema.checkChild( selection.focus.parent, 'placeholder' );
+        const isAllowed = model.schema.checkChild( selection.focus.parent, 'svy-placeholder' );
 
         this.isEnabled = isAllowed;
     }

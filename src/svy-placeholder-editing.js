@@ -26,7 +26,7 @@ export default class SvyPlaceholderUi extends Plugin {
 
         this.editor.editing.mapper.on(
             'viewToModelPosition',
-            viewToModelPositionOutsideModelElement( this.editor.model, viewElement => viewElement.hasClass( 'placeholder' ) )
+            viewToModelPositionOutsideModelElement( this.editor.model, viewElement => viewElement.hasClass( 'svy-placeholder' ) )
         );
     }
 
@@ -44,7 +44,7 @@ export default class SvyPlaceholderUi extends Plugin {
             isObject: true,
 
             // The placeholder can have many types, like date, name, surname, etc:
-            allowAttributes: [ 'name' ]
+            allowAttributes: [ 'name', 'dataprovider' ]
         } );
     }
 
@@ -54,18 +54,18 @@ export default class SvyPlaceholderUi extends Plugin {
         conversion.for( 'upcast' ).elementToElement( {
             view: {
                 name: 'span',
-                classes: [ 'placeholder' ]
+                classes: [ 'svy-placeholder' ]
             },
             model: ( viewElement, { writer: modelWriter } ) => {
                 // Extract the "name" from "{name}".
                 const name = viewElement.getChild( 0 ).data.slice( 1, -1 );
 
-                return modelWriter.createElement( 'placeholder', { name } );
+                return modelWriter.createElement( 'svy-placeholder', { name } );
             }
         } );
 
         conversion.for( 'editingDowncast' ).elementToElement( {
-            model: 'placeholder',
+            model: 'svy-placeholder',
             view: ( modelItem, { writer: viewWriter } ) => {
                 const widgetElement = createPlaceholderView( modelItem, viewWriter );
 
@@ -75,7 +75,7 @@ export default class SvyPlaceholderUi extends Plugin {
         } );
 
         conversion.for( 'dataDowncast' ).elementToElement( {
-            model: 'placeholder',
+            model: 'svy-placeholder',
             view: ( modelItem, { writer: viewWriter } ) => createPlaceholderView( modelItem, viewWriter )
         } );
 
@@ -84,7 +84,7 @@ export default class SvyPlaceholderUi extends Plugin {
             const name = modelItem.getAttribute( 'name' );
 
             const placeholderView = viewWriter.createContainerElement( 'span', {
-                class: 'placeholder'
+                class: 'svy-placeholder'
             } );
 
             // Insert the placeholder name (as a text).
