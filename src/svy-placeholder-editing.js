@@ -33,7 +33,7 @@ export default class SvyPlaceholderUi extends Plugin {
     _defineSchema() {
         const schema = this.editor.model.schema;
 
-        schema.register( 'servoyPlaceholder', {
+        schema.register( 'svy-placeholder', {
             // Allow wherever text is allowed:
             allowWhere: '$text',
 
@@ -43,7 +43,6 @@ export default class SvyPlaceholderUi extends Plugin {
             // The inline widget is self-contained so it cannot be split by the caret and can be selected:
             isObject: true,
 
-            // The placeholder can have many types, like date, name, surname, etc:
             allowAttributes: [ 'name', 'dataprovider' ]
         } );
     }
