@@ -19,13 +19,15 @@ export default class SvyPlaceholderUi extends Plugin {
 
         const editor = this.editor;
         const t = editor.t;
+
+        const placeholderConfig = this.editor.config.get('svyPlaceholderConfig') || [];
         const placeholderNames = [ 'date', 'first name', 'surname' ];
 
         this.dropdownView = null;
 
         // The "placeholder" dropdown must be registered among the UI components of the editor
         // to be displayed in the toolbar.
-        editor.ui.componentFactory.add( 'placeholder', locale => {
+        editor.ui.componentFactory.add( 'svy-placeholder', locale => {
             const dropdownView = createDropdown( locale );
 
             // Populate the list in the dropdown with items.
