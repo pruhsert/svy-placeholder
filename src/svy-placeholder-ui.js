@@ -72,8 +72,8 @@ export default class SvyPlaceholderUi extends Plugin {
                 const definition = {
                     type: 'button',
                     model: new Model( {
-                        commandParam: element.displayValue,
-                        label: element.displayValue,
+                        commandParam: element.name,
+                        label: element.name,
                         dataProvider: element.dataProvider,
                         withText: true
                     } )

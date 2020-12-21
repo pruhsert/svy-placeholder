@@ -1,6 +1,6 @@
 {
   "name": "@pruhsert/ckeditor5-svy-placeholder",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "main": "src/svy-placeholder.js",
   "repository": {
     "type": "git",
