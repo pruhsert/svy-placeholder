@@ -28,6 +28,12 @@ export default class SvyPlaceholderUi extends Plugin {
             'viewToModelPosition',
             viewToModelPositionOutsideModelElement( this.editor.model, viewElement => viewElement.hasClass( 'svy-placeholder' ) )
         );
+
+        this.editor.model.schema.addAttributeCheck( context => {
+            if ( context.endsWith( 'span' ) ) {
+                return true;
+            }
+        } );
     }
 
     _defineSchema() {
@@ -43,7 +49,7 @@ export default class SvyPlaceholderUi extends Plugin {
             // The inline widget is self-contained so it cannot be split by the caret and can be selected:
             isObject: true,
 
-            allowAttributes: [ 'name', 'dataProvider' ]
+            allowAttributes: [ 'name', 'dataprovider' ]
         } );
     }
 
@@ -56,10 +62,7 @@ export default class SvyPlaceholderUi extends Plugin {
                 classes: [ 'svy-placeholder' ]
             },
             model: ( viewElement, { writer: modelWriter } ) => {
-                // Extract the "name" from "{name}".
-                const name = viewElement.getChild( 0 ).data.slice( 1, -1 );
-
-                return modelWriter.createElement( 'svy-placeholder', { name } );
+                return modelWriter.createElement( 'svy-placeholder', viewElement.getAttributes() );
             }
         } );
 
@@ -85,7 +88,7 @@ export default class SvyPlaceholderUi extends Plugin {
             const placeholderView = viewWriter.createContainerElement( 'span', {
                 class: 'svy-placeholder',
                 name: name,
-                dataProvider: modelItem.getAttribute( 'dataProvider' )
+                dataprovider: modelItem.getAttribute( 'dataprovider' )
             } );
 
             // Insert the placeholder name (as a text).
