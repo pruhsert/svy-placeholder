@@ -43,7 +43,7 @@ export default class SvyPlaceholderUi extends Plugin {
             // The inline widget is self-contained so it cannot be split by the caret and can be selected:
             isObject: true,
 
-            allowAttributes: [ 'name', 'dataprovider' ]
+            allowAttributes: [ 'name', 'dataProvider' ]
         } );
     }
 
