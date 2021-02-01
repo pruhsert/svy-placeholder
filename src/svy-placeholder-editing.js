@@ -49,7 +49,7 @@ export default class SvyPlaceholderUi extends Plugin {
             // The inline widget is self-contained so it cannot be split by the caret and can be selected:
             isObject: true,
 
-            allowAttributes: [ 'name', 'dataprovider' ]
+            allowAttributes: [ 'name', 'dataprovider', 'recordvalue' ]
         } );
     }
 
@@ -88,7 +88,8 @@ export default class SvyPlaceholderUi extends Plugin {
             const placeholderView = viewWriter.createContainerElement( 'span', {
                 class: 'svy-placeholder',
                 name: name,
-                dataprovider: modelItem.getAttribute( 'dataprovider' )
+                dataprovider: modelItem.getAttribute( 'dataprovider' ),
+                recordvalue: modelItem.getAttribute( 'recordvalue' ) || '',
             } );
 
             // Insert the placeholder name (as a text).
