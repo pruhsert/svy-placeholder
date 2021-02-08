@@ -8,7 +8,6 @@ import { toWidget, viewToModelPositionOutsideModelElement } from '@ckeditor/cked
 import Widget from '@ckeditor/ckeditor5-widget/src/widget';
 
 import SvyPlaceholderCommand from './svy-placeholder-command';
-//import './theme/placeholder.css';
 
 export default class SvyPlaceholderUi extends Plugin {
 
@@ -49,7 +48,7 @@ export default class SvyPlaceholderUi extends Plugin {
             // The inline widget is self-contained so it cannot be split by the caret and can be selected:
             isObject: true,
 
-            allowAttributes: [ 'name', 'dataprovider', 'recordvalue' ]
+            allowAttributes: [ 'name', 'dataprovider', 'format' ]
         } );
     }
 
@@ -89,7 +88,7 @@ export default class SvyPlaceholderUi extends Plugin {
                 class: 'svy-placeholder',
                 name: name,
                 dataprovider: modelItem.getAttribute( 'dataprovider' ),
-                recordvalue: modelItem.getAttribute( 'recordvalue' ) || '',
+                format: modelItem.getAttribute('format')
             } );
 
             // Insert the placeholder name (as a text).
